@@ -5,7 +5,8 @@ module.exports = {
     "./templates/**/*.html.twig",
   ],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: ["winter", "night"],
+    darkTheme: "night",
   },
 
   theme: {
