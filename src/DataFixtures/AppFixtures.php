@@ -2,13 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Contact;
 use Faker\Factory;
 use App\Entity\User;
 use Faker\Generator;
-use App\Entity\Recipe;
-use App\Entity\Ingredient;
-use App\Entity\Mark;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -35,10 +31,21 @@ class AppFixtures extends Fixture
             ->setFirstName('admin')
             ->setLastName('admin')
             ->SetEmail('admin@storage.box')
-            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setRoles(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
             ->setPlainPassword('toto');
 
         $users[] = $admin;
+        $manager->persist($admin);
+
+        $userManager = new User();
+        $userManager
+            ->setFirstName('manager')
+            ->setLastName('manager')
+            ->SetEmail('manager@storage.box')
+            ->setRoles(['ROLE_USER', 'ROLE_MANAGER'])
+            ->setPlainPassword('toto');
+
+        $users[] = $userManager;
         $manager->persist($admin);
 
         for ($i = 0; $i < 10; $i++) {
