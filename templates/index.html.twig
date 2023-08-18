@@ -13,6 +13,9 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Se connecter à son compte
                     </h1>
+                    {% if error is not null %}
+                    <div class="text-xs text-red-500">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
                     <form class="space-y-4 md:space-y-6" action="{{ path('security.login') }}" method="post">
                         <div>
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse mail</label>
