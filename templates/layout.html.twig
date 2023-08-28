@@ -22,8 +22,6 @@
                         </label>
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 gap-2">
                             <li class="px-3 py-1 font-semibold">{{ user.getFirstName }} {{ user.getLastName }}</li>
-                            <li><a>Profil</a></li>
-                            <li><a>Paramètres</a></li>
                             <li class="group"><a class="group-hover:text-red-500" href="{{ path('security.logout') }}">Déconnexion</a></li>
                         </ul>
                     </div>
