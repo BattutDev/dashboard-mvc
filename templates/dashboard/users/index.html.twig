@@ -1,0 +1,47 @@
+{% extends '/layout.html.twig' %}
+
+{% block content %}
+
+    <div class="w-full max-h-full max-w-md overflow-hidden p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-between mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Liste des utilisateurs</h5>
+            <a href="{{ path('new.users') }}" class="btn btn-outline btn-primary btn-sm text-xs md:text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 sm:h-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                <span>Ajouter</span>
+            </a>
+        </div>
+        <div class="flow-root overflow-y-scroll max-h-full">
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700 overflow-hidden h-min">
+                {% for user in users %}
+                    <li class="py-3 sm:py-4">
+                        <a href="{{ path('id.users', {id: user.getId}) }}">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                                        <div class="w-10 rounded-full">
+                                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                <span class="font-medium text-gray-600 dark:text-gray-300">{{ user.getFirstName|slice(0, 1) ~ user.getLastName|slice(0, 1) }}</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                        {{ user.getFirstName }} {{ user.getLastName }}
+                                    </p>
+                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                        {{ user.getEmail }}
+                                    </p>
+                                </div>
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    {{ user.getId }}
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

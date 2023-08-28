@@ -1,10 +1,10 @@
-# Gestion de stockage
+# Dashboard-MVC
 
-Application PHP MVC de gestion de stockage, 
+Application PHP MVC de gestion, 
 fictive, mais fonctionnelle,
 Les mots de passe sont hashés avant d'êtres stockés,
 
-Cette application utilise une base de données postgreSQL, mais peut-être changée
+Cette application utilise une base de données postgreSQL, mais peut-être changée depuis le fichier .env
 
 ## Instalation
 

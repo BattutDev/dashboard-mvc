@@ -1,0 +1,46 @@
+{% extends '/layout.html.twig' %}
+
+{% block content %}
+        <div class="flex flex-col gap-10">
+            <div class="flex items-center gap-2 p-5 h-min flex-col bg-gray-200 dark:bg-gray-700 rounded-box">
+                <label tabindex="0" class="avatar">
+                    <div class="w-20 rounded-full">
+                        <div class="relative inline-flex items-center justify-center w-20 h-20 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">{{ selected_user.getFirstName|slice(0, 1) ~ selected_user.getLastName|slice(0, 1) }}</span>
+                        </div>
+                    </div>
+                </label>
+                <div class="font-semibold text-lg">{{ selected_user.getFirstName }} {{ selected_user.getLastName }}</div>
+                <div class="text-sm">{{ selected_user.getEmail }}</div>
+                <div class="flex flex-col w-40">
+                    <div class="text-xs underline">Roles:</div>
+                    <div class="flex flex-wrap gap-1 p-2">
+                        {% for role in selected_user.getRoles %}
+                            <div class="btn btn-primary btn-xs flex gap-3 group"><a href="{{ path('roles.users', {id: selected_user.getId, name: role, action: 'remove'}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 group-hover:stroke-red-500"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></a> {{ role }}</div>
+                        {% endfor %}
+                        <div class="dropdown dropdown-bottom">
+                            <label tabindex="0" class="btn btn-xs text-xs btn-warning"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M5 12h14"/><path d="M12 5v14"/></svg></label>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                {% set array = ['ROLE_USER', 'ROLE_MANAGER'] %}
+                                {% for role in array %}
+                                    {% if role not in selected_user.getRoles %}
+                                    <li><a href="{{ path('roles.users', {id: selected_user.getId, name: role, action: 'add'}) }}">{{ role }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-sm">Compte créé le {{ selected_user.getCreatedAt.format('d F Y') }}</div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-5">
+                {% if selected_user.getId != user.getId %}
+                <a href="{{ path('delete.users', {id: selected_user.getId}) }}" class="btn btn-outline btn-error">Supprimer</a>
+                {% endif %}
+                <button class="btn btn-outline btn-secondary">Modifier</button>
+            </div>
+        </div>
+
+
+
+{% endblock %}
